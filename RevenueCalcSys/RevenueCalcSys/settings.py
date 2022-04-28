@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'courier.apps.CourierConfig',
+    'income.apps.IncomeConfig',
 ]
 
 MIDDLEWARE = [
