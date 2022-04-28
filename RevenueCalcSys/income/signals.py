@@ -36,6 +36,7 @@ def SaveWeeklyIncome(sender, instance, *args, **kwargs):
     else:
         pass # thinking...
 
+
 @receiver(post_save, sender=IncreaseIncome)
 def SaveIncreaseIncome(sender, instance, *args, **kwargs):
     '''Saves increase income'''
