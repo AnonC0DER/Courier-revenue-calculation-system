@@ -16,7 +16,7 @@ class IncreaseDecreaseIncomeAdmin(admin.ModelAdmin):
 
 
 class DailyIncomeAdmin(admin.ModelAdmin):
-    list_display = ['courier', 'amount', 'date']
+    list_display = ['courier', 'income', 'date']
     search_fields = ['courier__full_name', 'date']
     readonly_fields = ['date']
 

@@ -3,7 +3,7 @@ from courier.models import Courier
 
 class DailyIncome(models.Model):
     courier = models.ForeignKey(Courier, on_delete=models.CASCADE)
-    amount = models.PositiveIntegerField()
+    income = models.PositiveIntegerField()
     date = models.DateField(auto_now_add=True)
 
 
