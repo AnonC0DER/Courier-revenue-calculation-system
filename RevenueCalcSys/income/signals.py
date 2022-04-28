@@ -32,6 +32,9 @@ def SaveWeeklyIncome(sender, instance, *args, **kwargs):
         except WeeklyIncome.DoesNotExist:
             WeeklyIncome.objects.create(courier=instance.courier, income=instance.income, saturday=instance.date)
 
+    # If it's not saturday
+    else:
+        pass # thinking...
 
 @receiver(post_save, sender=IncreaseIncome)
 def SaveIncreaseIncome(sender, instance, *args, **kwargs):
@@ -48,5 +51,5 @@ def SaveDecreaseIncome(sender, instance, *args, **kwargs):
     daily_income.income -= instance.amount
     if daily_income.income < 0:
         daily_income.income = 0
-        
+
     daily_income.save()
