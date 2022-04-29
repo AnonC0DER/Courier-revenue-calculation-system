@@ -7,7 +7,9 @@ class WeeklyIncomeView(ListAPIView):
     
     def get_queryset(self):
         '''from_date and to_date queries'''
+        # url : /api/weekly-incomes/?from_date=0000-00-00
         from_date = self.request.query_params.get('from_date')
+        # url : /api/weekly-incomes/?to_date=0000-00-00
         to_date = self.request.query_params.get('to_date')
         queryset = WeeklyIncome.objects.all()
         if from_date:
