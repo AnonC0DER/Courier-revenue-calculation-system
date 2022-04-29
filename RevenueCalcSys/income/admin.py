@@ -6,19 +6,16 @@ from income.models.DWIncome import DailyIncome, WeeklyIncome
 class TripIncomeAdmin(admin.ModelAdmin):
     list_display = ['courier', 'income', 'trip_date']
     search_fields = ['courier__full_name', 'trip_date']
-    readonly_fields = ['trip_date']
 
 
 class IncreaseDecreaseIncomeAdmin(admin.ModelAdmin):
     list_display = ['courier', 'amount', 'date']
     search_fields = ['courier__full_name', 'date']
-    readonly_fields = ['date']
 
 
 class DailyIncomeAdmin(admin.ModelAdmin):
     list_display = ['courier', 'income', 'date']
     search_fields = ['courier__full_name', 'date']
-    readonly_fields = ['date']
 
 
 class WeeklyIncomeAdmin(admin.ModelAdmin):
