@@ -1,7 +1,10 @@
 # Courier revenue calculation system
- 
+
 ## Miare.ir Techical task
 Read [TODO list](https://github.com/AnonC0DER/Courier-revenue-calculation-system/blob/main/TODO.md)
+
+## Unsolved problems
+- [ ] There's one unsolved problem in [signals](https://github.com/AnonC0DER/Courier-revenue-calculation-system/blob/main/RevenueCalcSys/income/signals.py#L36)
 
 ## Setup
 - `pip install -r requirements.txt`
