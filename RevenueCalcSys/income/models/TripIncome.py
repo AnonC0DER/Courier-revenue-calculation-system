@@ -6,7 +6,7 @@ class TripIncome(models.Model):
     courier = models.ForeignKey(Courier, on_delete=models.CASCADE)
     # income cannot be negative
     income = models.PositiveIntegerField()
-    trip_date = models.DateField(auto_now_add=True)
+    trip_date = models.DateField(auto_created=True)
 
 
 class IncreaseIncome(models.Model):
@@ -14,7 +14,7 @@ class IncreaseIncome(models.Model):
     courier = models.ForeignKey(Courier, on_delete=models.CASCADE)
     amount = models.PositiveIntegerField()
     descriptions = models.TextField()
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(auto_created=True)
 
 
 class DecreaseIncome(models.Model):
@@ -22,4 +22,4 @@ class DecreaseIncome(models.Model):
     courier = models.ForeignKey(Courier, on_delete=models.CASCADE)
     amount = models.PositiveIntegerField()
     descriptions = models.TextField()
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(auto_created=True)
