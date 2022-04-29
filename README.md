@@ -3,7 +3,7 @@
 ## Read [TODO list](https://github.com/AnonC0DER/Courier-revenue-calculation-system/blob/main/TODO.md)
 
 ## Unsolved problems
-- [ ] There's one unsolved problem in [signals](https://github.com/AnonC0DER/Courier-revenue-calculation-system/blob/main/RevenueCalcSys/income/signals.py#L36)
+- [x] Unsolved problem successfully [solved](https://github.com/AnonC0DER/Courier-revenue-calculation-system/commit/83e650f7ccbba3bb3924d6d616bb990203b1de45)
 
 ## Setup
 - `pip install -r requirements.txt`
