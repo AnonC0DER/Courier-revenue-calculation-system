@@ -25,10 +25,10 @@ class TestDailyIncome(TestCase):
     def test_TripIncome_increases_by_IncreaseIncome(self):
         '''Test TripIncome object increases by IncreaseIncome object'''
         trip_1 = TripIncome.objects.create(courier=self.courier, income=100, trip_date=date(2022, 4, 29))
-        increase_income_1 = IncreaseIncome.objects.create(courier=self.courier, amount=12, descriptions='Test descriptions', date=date(2022, 4, 29))
+        increase_income = IncreaseIncome.objects.create(courier=self.courier, amount=12, descriptions='Test descriptions', date=date(2022, 4, 29))
         daily_income = DailyIncome.objects.get(courier=self.courier, date=date(2022, 4, 29))
         
-        self.assertEqual(daily_income.income, 112)
+        self.assertEqual(trip_1.income + increase_income.amount, daily_income.income)
     
     def test_TripIncome_decreases_by_DecreaseIncome(self):
         '''Test TripIncome object decrease by DecreaseIncome object'''
