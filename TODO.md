@@ -9,7 +9,7 @@
 ## Couriers' income
     
 - Earnings :
-    - Distance, customer type, time, distance, etc.
+    - Distance, customer type, time, etc.
     - It can't be negative
 
 - Increase revenue :
