@@ -22,18 +22,55 @@ class TestDailyIncome(TestCase):
         self.assertEqual(DailyIncome.objects.all().count(), 2)
         self.assertEqual(TripIncome.objects.all().count(), 3)
     
-    def test_TripIncome_increases_by_IncreaseIncome(self):
-        '''Test TripIncome object increases by IncreaseIncome object'''
+    def test_DailyIncome_increases_by_IncreaseIncome(self):
+        '''Test DailyIncome object increases by IncreaseIncome object'''
+        increase_income = IncreaseIncome.objects.create(courier=self.courier, amount=50, descriptions='Birthday gift', date=date(2022, 4, 29))
         trip_1 = TripIncome.objects.create(courier=self.courier, income=100, trip_date=date(2022, 4, 29))
-        increase_income = IncreaseIncome.objects.create(courier=self.courier, amount=12, descriptions='Test descriptions', date=date(2022, 4, 29))
         daily_income = DailyIncome.objects.get(courier=self.courier, date=date(2022, 4, 29))
         
-        self.assertEqual(trip_1.income + increase_income.amount, daily_income.income)
+        self.assertEqual(daily_income.income, 150)
     
-    def test_TripIncome_decreases_by_DecreaseIncome(self):
-        '''Test TripIncome object decrease by DecreaseIncome object'''
+    def test_DailyIncome_decreases_by_DecreaseIncome(self):
+        '''Test DailyIncome object decrease by DecreaseIncome object'''
+        decrease_income = DecreaseIncome.objects.create(courier=self.courier, amount=25, descriptions='Damage', date=date(2022, 4, 29))
         trip_1 = TripIncome.objects.create(courier=self.courier, income=100, trip_date=date(2022, 4, 29))
-        decrease_income_1 = DecreaseIncome.objects.create(courier=self.courier, amount=25, descriptions='Test descriptions', date=date(2022, 4, 29))
         daily_income = DailyIncome.objects.get(courier=self.courier, date=date(2022, 4, 29))
+
+        self.assertEqual(daily_income.income, 75)
+
+    def test_DailyIncome_increases_and_decreases(self):
+        '''Test DailyIncome object increases and decrease by DecreaseIncome and IncreaseIncome'''
+        increase_income = IncreaseIncome.objects.create(courier=self.courier, amount=50, descriptions='Birthday gift', date=date(2022, 4, 29))
+        decrease_income = DecreaseIncome.objects.create(courier=self.courier, amount=25, descriptions='Damage', date=date(2022, 4, 29))
+        trip = TripIncome.objects.create(courier=self.courier, income=100, trip_date=date(2022, 4, 29))
+        daily_income = DailyIncome.objects.get(courier=self.courier, date=date(2022, 4, 29))
+
+        self.assertEqual(daily_income.income, 125)
+
+
+class TestWeeklyIncome(TestCase):
+    '''Tests to test WeeklyIncome'''
+
+    def setUp(self):
+        self.courier = Courier.objects.create(full_name='Test Courier')
+        # Create 8 TripIncome in 8 days
+        self.sample_TripIncome(29, 4)
+        self.sample_TripIncome(30, 4)
+        self.sample_TripIncome(1, 5)
+        self.sample_TripIncome(2, 5)
+        self.sample_TripIncome(3, 5)
+        self.sample_TripIncome(4, 5)
+        self.sample_TripIncome(5, 5)
+        self.sample_TripIncome(6, 5)
+
+    def sample_TripIncome(self, day, month):
+        '''Creates a sample TripIncome object'''
+        TripIncome.objects.create(courier=self.courier, income=100, trip_date=date(2022, month, day))
+
+    def test_WeeklyIncome_objects(self):
+        '''Test WeeklyIncome objects'''
+        qs = WeeklyIncome.objects.all()
         
-        self.assertEqual(trip_1.income - decrease_income_1.amount, daily_income.income)
+        self.assertEqual(qs.count(), 2)
+        self.assertEqual(qs.first().income, 100)
+        self.assertEqual(qs.get(id=2).income, 700)
