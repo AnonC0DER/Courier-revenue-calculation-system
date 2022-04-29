@@ -5,7 +5,7 @@ from income.models.DWIncome import DailyIncome, WeeklyIncome
 from courier.models import Courier
 
 class TestDailyIncome(TestCase):
-    '''Tests to test daily income model its signals'''
+    '''Tests to test daily income model and its signals'''
     def setUp(self):
         self.courier = Courier.objects.create(full_name='Test Courier')
 
@@ -37,3 +37,17 @@ class TestDailyIncome(TestCase):
         daily_income = DailyIncome.objects.get(courier=self.courier, date=date(2022, 4, 29))
         
         self.assertEqual(trip_1.income - decrease_income_1.amount, daily_income.income)
+
+
+class TestWeeklyIncome(TestCase):
+    '''Tests to test weekly income model and its signals'''
+    def setUp(self):
+        self.courier = Courier.objects.create(full_name='Test Courier')
+        TripIncome.objects.create(courier=self.courier, income=35, trip_date=date(2022, 4, 30))
+
+    def test_WeeklyIncome_increases_by_DailyIncome(self):
+        '''Test WeeklyIncome increases by DailyIncome'''
+        daily_incomes = DailyIncome.objects.filter(courier=self.courier).values_list('income', flat=True)
+        weekly_income = WeeklyIncome.objects.get(courier=self.courier)
+
+        self.assertEqual(weekly_income.income, sum(daily_incomes))
