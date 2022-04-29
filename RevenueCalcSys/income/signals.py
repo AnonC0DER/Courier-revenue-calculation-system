@@ -1,5 +1,5 @@
 from django.dispatch import receiver
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save
 from income.models.DWIncome import DailyIncome, WeeklyIncome
 from income.models.TripIncome import TripIncome, DecreaseIncome, IncreaseIncome
 
